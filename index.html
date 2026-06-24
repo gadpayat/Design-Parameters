@@ -32,6 +32,20 @@ body{
     animation:sparks linear infinite;
 }
 
+.weld-point{
+    position:absolute;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#fff;
+    z-index:999;
+
+    box-shadow:
+        0 0 10px #fff,
+        0 0 20px #ffd54f,
+        0 0 35px #ff9800;
+}
+
 @keyframes sparks{
     from{
         transform:translate(0,0) scale(1);
@@ -376,7 +390,9 @@ h1{font-size:2rem}
             fill="#00ff66"/>
 
 </svg>
-
+    
+</div>
+    
 </div>
 
 <div class="container">
@@ -404,6 +420,8 @@ h1{font-size:2rem}
 </footer>
 
 <script>
+const scene = document.getElementById('scene');
+
 const weldPoints = [
     {x:15, y:75},
     {x:25, y:65},
@@ -422,25 +440,50 @@ const weldPoints = [
     {x:70, y:25}
 ];
 
-for(let i=0;i<600;i++){
+// Visible welding stations
+weldPoints.forEach(point => {
+    const wp = document.createElement('div');
+    wp.className = 'weld-point';
+    wp.style.left = point.x + '%';
+    wp.style.top = point.y + '%';
+    scene.appendChild(wp);
+});
 
-    const point =
-        weldPoints[Math.floor(Math.random()*weldPoints.length)];
+// Generate sparks continuously
+function createSpark(point){
 
-    const s=document.createElement('div');
-    s.className='spark';
+    const s = document.createElement('div');
+    s.className = 'spark';
 
-    s.style.left=(point.x + Math.random()*4)+'%';
-    s.style.top=(point.y + Math.random()*4)+'%';
+    s.style.left = (point.x + Math.random()*8 - 4) + '%';
+    s.style.top  = (point.y + Math.random()*8 - 4) + '%';
 
-    s.style.setProperty('--x',(Math.random()*220-110)+'px');
-    s.style.setProperty('--y',(Math.random()*-180)+'px');
+    s.style.setProperty('--x', (Math.random()*300 - 150) + 'px');
+    s.style.setProperty('--y', (Math.random()*-250) + 'px');
 
-    s.style.animationDuration=(0.5+Math.random()*1.2)+'s';
-    s.style.animationDelay=(Math.random()*2)+'s';
+    s.style.animationDuration = (0.4 + Math.random()*0.8) + 's';
 
-    document.getElementById('scene').appendChild(s);
+    scene.appendChild(s);
+
+    setTimeout(() => {
+        if(s.parentNode) s.remove();
+    }, 1200);
 }
+
+// Continuous welding effect
+setInterval(() => {
+
+    weldPoints.forEach(point => {
+
+        const count = Math.floor(Math.random()*6) + 4;
+
+        for(let i=0;i<count;i++){
+            createSpark(point);
+        }
+
+    });
+
+}, 150);
 </script>
 
 </body>
