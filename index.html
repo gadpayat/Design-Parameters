@@ -3,31 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Design Parameters</title>
+<title>Design Parameters Portal</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
 
 body{
-    overflow:hidden;
     height:100vh;
-    background:linear-gradient(to bottom,#87ceeb,#d8f3ff);
+    overflow:hidden;
+    background:linear-gradient(to bottom,#6faee0,#dcefff);
 }
 
-/* ==========================
-   CONSTRUCTION BACKGROUND
-========================== */
-
-#bg{
+/* Background */
+#scene{
     position:fixed;
     inset:0;
     overflow:hidden;
-    z-index:0;
 }
 
 /* Ground */
@@ -35,192 +26,126 @@ body{
     position:absolute;
     bottom:0;
     width:100%;
-    height:120px;
-    background:#8b6b45;
+    height:140px;
+    background:#77583a;
 }
 
-/* Crane */
+/* Tower Crane */
 .crane{
     position:absolute;
-    bottom:120px;
-    left:10%;
-    width:12px;
-    height:300px;
-    background:#ffb000;
+    left:8%;
+    bottom:140px;
+    width:14px;
+    height:340px;
+    background:#ffb300;
 }
 
-.crane::before{
-    content:'';
+.crane-arm{
     position:absolute;
     top:0;
     left:0;
-    width:250px;
+    width:260px;
     height:10px;
-    background:#ffb000;
+    background:#ffb300;
+    transform-origin:left center;
+    animation:swing 6s ease-in-out infinite;
 }
 
-.crane::after{
-    content:'';
+.hook{
     position:absolute;
-    top:0;
-    left:220px;
+    right:10px;
+    top:10px;
     width:3px;
-    height:80px;
-    background:#444;
-    animation:hook 4s ease-in-out infinite;
+    height:90px;
+    background:#333;
+    animation:lift 4s ease-in-out infinite;
 }
 
-@keyframes hook{
-    0%,100%{height:80px;}
-    50%{height:130px;}
+@keyframes swing{
+    0%,100%{transform:rotate(-2deg)}
+    50%{transform:rotate(2deg)}
+}
+
+@keyframes lift{
+    0%,100%{height:90px}
+    50%{height:150px}
 }
 
 /* Building */
 .building{
     position:absolute;
-    bottom:120px;
-    right:10%;
-    width:180px;
-    height:240px;
-    background:#cfcfcf;
-    border:3px solid #999;
+    right:8%;
+    bottom:140px;
+    width:220px;
+    height:260px;
+    background:#c8c8c8;
+    border:3px solid #888;
 }
 
-.window{
-    position:absolute;
-    width:30px;
-    height:30px;
-    background:#8dd6ff;
-}
-
-.window:nth-child(1){top:20px;left:20px;}
-.window:nth-child(2){top:20px;left:70px;}
-.window:nth-child(3){top:20px;left:120px;}
-.window:nth-child(4){top:80px;left:20px;}
-.window:nth-child(5){top:80px;left:70px;}
-.window:nth-child(6){top:80px;left:120px;}
-.window:nth-child(7){top:140px;left:20px;}
-.window:nth-child(8){top:140px;left:70px;}
-.window:nth-child(9){top:140px;left:120px;}
-
-/* ==========================
-   STICKMEN
-========================== */
-
+/* Workers */
 .worker{
     position:absolute;
-    bottom:120px;
+    bottom:140px;
     width:40px;
     height:90px;
-    animation:walk 12s linear infinite;
+    animation:walk 16s linear infinite;
 }
 
-.worker:nth-child(1){
-    left:-100px;
-}
-
-.worker:nth-child(2){
-    left:-300px;
-    animation-delay:4s;
-}
-
-.worker:nth-child(3){
-    left:-500px;
-    animation-delay:8s;
-}
-
-@keyframes walk{
-    from{
-        transform:translateX(0);
-    }
-    to{
-        transform:translateX(calc(100vw + 700px));
-    }
-}
+.worker:nth-child(1){left:-50px}
+.worker:nth-child(2){left:-250px;animation-delay:5s}
+.worker:nth-child(3){left:-450px;animation-delay:10s}
 
 .head{
-    width:18px;
-    height:18px;
-    background:#ffd8b1;
-    border-radius:50%;
-    margin:auto;
-    border:2px solid #000;
+    width:18px;height:18px;background:#ffd6b3;border-radius:50%;
+    border:2px solid #000;margin:auto;
 }
-
 .helmet{
-    width:20px;
-    height:10px;
-    background:#ffcc00;
+    width:20px;height:10px;background:#ffd000;
     border-radius:10px 10px 0 0;
-    margin:auto;
-    margin-top:-18px;
+    margin:-18px auto 0;
 }
-
-.body{
-    width:3px;
-    height:28px;
-    background:#000;
-    margin:auto;
+.bodyline{
+    width:3px;height:28px;background:#000;margin:auto;
 }
-
 .arm1,.arm2,.leg1,.leg2{
-    position:absolute;
-    width:20px;
-    height:2px;
-    background:#000;
+    position:absolute;background:#000;height:2px;width:18px;
+}
+.arm1{top:35px;left:9px;transform:rotate(25deg)}
+.arm2{top:35px;left:13px;transform:rotate(-25deg)}
+.leg1{top:60px;left:9px;transform:rotate(25deg)}
+.leg2{top:60px;left:13px;transform:rotate(-25deg)}
+
+@keyframes walk{
+    from{transform:translateX(0)}
+    to{transform:translateX(calc(100vw + 600px))}
 }
 
-.arm1{
-    top:35px;
-    left:8px;
-    transform:rotate(25deg);
-}
-
-.arm2{
-    top:35px;
-    left:12px;
-    transform:rotate(-25deg);
-}
-
-.leg1{
-    top:60px;
-    left:8px;
-    transform:rotate(25deg);
-}
-
-.leg2{
-    top:60px;
-    left:12px;
-    transform:rotate(-25deg);
-}
-
-/* Dust */
-.dust{
+/* Welding Sparks */
+.spark{
     position:absolute;
     width:4px;
     height:4px;
-    background:white;
+    background:#ffd54f;
     border-radius:50%;
-    opacity:.4;
-    animation:float 12s linear infinite;
+    opacity:.9;
+    animation:sparks linear infinite;
 }
 
-@keyframes float{
+@keyframes sparks{
     from{
-        transform:translateY(100vh);
+        transform:translate(0,0) scale(1);
+        opacity:1;
     }
     to{
-        transform:translateY(-100vh);
+        transform:translate(var(--x),var(--y)) scale(0);
+        opacity:0;
     }
 }
 
-/* ==========================
-   MAIN CONTENT
-========================== */
-
+/* Main Panel */
 .container{
     position:relative;
-    z-index:10;
+    z-index:5;
     height:100vh;
     display:flex;
     justify-content:center;
@@ -228,189 +153,157 @@ body{
 }
 
 .panel{
-    width:min(1100px,90%);
+    width:min(1100px,92%);
     text-align:center;
 }
 
 h1{
+    color:#fff;
     font-size:3rem;
-    color:white;
-    text-shadow:0 0 15px rgba(0,0,0,.4);
+    text-shadow:0 0 20px rgba(0,0,0,.4);
 }
 
 .subtitle{
-    color:white;
-    font-size:1.1rem;
-    margin-top:10px;
-    margin-bottom:40px;
-    text-shadow:0 0 10px rgba(0,0,0,.4);
+    color:#fff;
+    margin:10px 0 35px;
 }
 
+/* Buttons */
 .grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:20px;
+    gap:18px;
 }
 
-/* ==========================
-   GLASS BUTTONS
-========================== */
-
 .btn{
+    position:relative;
+    overflow:hidden;
     padding:18px;
-    border:none;
-    border-radius:20px;
-    font-size:1rem;
-    color:white;
+    border-radius:22px;
+    border:1px solid rgba(255,80,80,.4);
+    color:#fff;
+    font-weight:700;
+    text-transform:uppercase;
     cursor:pointer;
 
-    background:rgba(255,255,255,.15);
+    background:
+    radial-gradient(circle at 20% 20%,rgba(255,0,0,.7),transparent 35%),
+    radial-gradient(circle at 80% 70%,rgba(140,0,0,.8),transparent 45%),
+    linear-gradient(135deg,#050505,#330000,#111);
 
-    backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
-
-    border:1px solid rgba(255,255,255,.3);
+    backdrop-filter:blur(12px);
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,.25),
-        inset 0 1px 1px rgba(255,255,255,.4);
+    0 10px 25px rgba(0,0,0,.5),
+    0 0 20px rgba(255,0,0,.3);
 
-    transition:.3s;
+    transition:.35s;
 }
 
 .btn:hover{
-    transform:translateY(-6px);
+    transform:translateY(-6px) scale(1.03);
     box-shadow:
-        0 15px 30px rgba(0,0,0,.35),
-        inset 0 1px 2px rgba(255,255,255,.5);
+    0 18px 35px rgba(0,0,0,.6),
+    0 0 35px rgba(255,0,0,.6);
 }
 
-.btn:active{
-    transform:translateY(2px);
+.btn::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.18),transparent);
+    transform:translateX(-150%);
+    transition:1s;
+}
+
+.btn:hover::before{
+    transform:translateX(150%);
+}
+
+footer{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    text-align:center;
+    padding:12px;
+    color:white;
+    background:rgba(0,0,0,.45);
+    border-top:2px solid rgba(255,0,0,.4);
+    z-index:10;
 }
 
 @media(max-width:768px){
-
-    h1{
-        font-size:2rem;
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
+.grid{grid-template-columns:1fr}
+h1{font-size:2rem}
 }
 </style>
 </head>
-
 <body>
 
-<div id="bg">
+<div id="scene">
 
-    <div class="crane"></div>
-
-    <div class="building">
-        <div class="window"></div>
-        <div class="window"></div>
-        <div class="window"></div>
-        <div class="window"></div>
-        <div class="window"></div>
-        <div class="window"></div>
-        <div class="window"></div>
-        <div class="window"></div>
-        <div class="window"></div>
+<div class="crane">
+    <div class="crane-arm">
+        <div class="hook"></div>
     </div>
+</div>
 
-    <!-- Workers -->
+<div class="building"></div>
 
-    <div class="worker">
-        <div class="head"></div>
-        <div class="helmet"></div>
-        <div class="body"></div>
-        <div class="arm1"></div>
-        <div class="arm2"></div>
-        <div class="leg1"></div>
-        <div class="leg2"></div>
-    </div>
+<div class="worker">
+<div class="head"></div><div class="helmet"></div><div class="bodyline"></div>
+<div class="arm1"></div><div class="arm2"></div><div class="leg1"></div><div class="leg2"></div>
+</div>
 
-    <div class="worker">
-        <div class="head"></div>
-        <div class="helmet"></div>
-        <div class="body"></div>
-        <div class="arm1"></div>
-        <div class="arm2"></div>
-        <div class="leg1"></div>
-        <div class="leg2"></div>
-    </div>
+<div class="worker">
+<div class="head"></div><div class="helmet"></div><div class="bodyline"></div>
+<div class="arm1"></div><div class="arm2"></div><div class="leg1"></div><div class="leg2"></div>
+</div>
 
-    <div class="worker">
-        <div class="head"></div>
-        <div class="helmet"></div>
-        <div class="body"></div>
-        <div class="arm1"></div>
-        <div class="arm2"></div>
-        <div class="leg1"></div>
-        <div class="leg2"></div>
-    </div>
+<div class="worker">
+<div class="head"></div><div class="helmet"></div><div class="bodyline"></div>
+<div class="arm1"></div><div class="arm2"></div><div class="leg1"></div><div class="leg2"></div>
+</div>
 
-    <div class="ground"></div>
-
+<div class="ground"></div>
 </div>
 
 <div class="container">
+<div class="panel">
+<h1>DESIGN PARAMETERS</h1>
+<div class="subtitle">Forms • Templates • References - for all Modalities</div>
 
-    <div class="panel">
-
-        <h1>DESIGN PARAMETERS</h1>
-
-        <div class="subtitle">
-            Forms • Templates • References - for all Modalities
-        </div>
-
-        <div class="grid">
-
-            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 01</button>
-
-            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 02</button>
-
-            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 03</button>
-
-            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 04</button>
-
-            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 05</button>
-
-            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 06</button>
-
-            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 07</button>
-
-            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 08</button>
-
-            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 09</button>
-
-            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 10</button>
-
-        </div>
-
-    </div>
-
+<div class="grid">
+<button class="btn" onclick="window.open('#')">Button 01</button>
+<button class="btn" onclick="window.open('#')">Button 02</button>
+<button class="btn" onclick="window.open('#')">Button 03</button>
+<button class="btn" onclick="window.open('#')">Button 04</button>
+<button class="btn" onclick="window.open('#')">Button 05</button>
+<button class="btn" onclick="window.open('#')">Button 06</button>
+<button class="btn" onclick="window.open('#')">Button 07</button>
+<button class="btn" onclick="window.open('#')">Button 08</button>
+<button class="btn" onclick="window.open('#')">Button 09</button>
+<button class="btn" onclick="window.open('#')">Button 10</button>
+</div>
+</div>
 </div>
 
+<footer>
+DESIGN PARAMETERS PORTAL © 2026 | Forms • Templates • References - for all Modalities
+</footer>
+
 <script>
-
-/* Floating dust particles */
-
-for(let i=0;i<50;i++){
-
-    let d=document.createElement('div');
-    d.className='dust';
-
-    d.style.left=Math.random()*100+'vw';
-    d.style.animationDuration=(8+Math.random()*10)+'s';
-    d.style.animationDelay=Math.random()*5+'s';
-
-    document.getElementById('bg').appendChild(d);
+for(let i=0;i<120;i++){
+ const s=document.createElement('div');
+ s.className='spark';
+ s.style.left=(70+Math.random()*10)+'%';
+ s.style.top=(55+Math.random()*10)+'%';
+ s.style.setProperty('--x',(Math.random()*180-90)+'px');
+ s.style.setProperty('--y',(Math.random()*-140)+'px');
+ s.style.animationDuration=(0.8+Math.random()*1.5)+'s';
+ s.style.animationDelay=(Math.random()*2)+'s';
+ document.getElementById('scene').appendChild(s);
 }
-
 </script>
 
 </body>
