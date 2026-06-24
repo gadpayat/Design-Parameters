@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Parameters</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    overflow:hidden;
+    height:100vh;
+    background:linear-gradient(to bottom,#87ceeb,#d8f3ff);
+}
+
+/* ==========================
+   CONSTRUCTION BACKGROUND
+========================== */
+
+#bg{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    z-index:0;
+}
+
+/* Ground */
+.ground{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:120px;
+    background:#8b6b45;
+}
+
+/* Crane */
+.crane{
+    position:absolute;
+    bottom:120px;
+    left:10%;
+    width:12px;
+    height:300px;
+    background:#ffb000;
+}
+
+.crane::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:250px;
+    height:10px;
+    background:#ffb000;
+}
+
+.crane::after{
+    content:'';
+    position:absolute;
+    top:0;
+    left:220px;
+    width:3px;
+    height:80px;
+    background:#444;
+    animation:hook 4s ease-in-out infinite;
+}
+
+@keyframes hook{
+    0%,100%{height:80px;}
+    50%{height:130px;}
+}
+
+/* Building */
+.building{
+    position:absolute;
+    bottom:120px;
+    right:10%;
+    width:180px;
+    height:240px;
+    background:#cfcfcf;
+    border:3px solid #999;
+}
+
+.window{
+    position:absolute;
+    width:30px;
+    height:30px;
+    background:#8dd6ff;
+}
+
+.window:nth-child(1){top:20px;left:20px;}
+.window:nth-child(2){top:20px;left:70px;}
+.window:nth-child(3){top:20px;left:120px;}
+.window:nth-child(4){top:80px;left:20px;}
+.window:nth-child(5){top:80px;left:70px;}
+.window:nth-child(6){top:80px;left:120px;}
+.window:nth-child(7){top:140px;left:20px;}
+.window:nth-child(8){top:140px;left:70px;}
+.window:nth-child(9){top:140px;left:120px;}
+
+/* ==========================
+   STICKMEN
+========================== */
+
+.worker{
+    position:absolute;
+    bottom:120px;
+    width:40px;
+    height:90px;
+    animation:walk 12s linear infinite;
+}
+
+.worker:nth-child(1){
+    left:-100px;
+}
+
+.worker:nth-child(2){
+    left:-300px;
+    animation-delay:4s;
+}
+
+.worker:nth-child(3){
+    left:-500px;
+    animation-delay:8s;
+}
+
+@keyframes walk{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(calc(100vw + 700px));
+    }
+}
+
+.head{
+    width:18px;
+    height:18px;
+    background:#ffd8b1;
+    border-radius:50%;
+    margin:auto;
+    border:2px solid #000;
+}
+
+.helmet{
+    width:20px;
+    height:10px;
+    background:#ffcc00;
+    border-radius:10px 10px 0 0;
+    margin:auto;
+    margin-top:-18px;
+}
+
+.body{
+    width:3px;
+    height:28px;
+    background:#000;
+    margin:auto;
+}
+
+.arm1,.arm2,.leg1,.leg2{
+    position:absolute;
+    width:20px;
+    height:2px;
+    background:#000;
+}
+
+.arm1{
+    top:35px;
+    left:8px;
+    transform:rotate(25deg);
+}
+
+.arm2{
+    top:35px;
+    left:12px;
+    transform:rotate(-25deg);
+}
+
+.leg1{
+    top:60px;
+    left:8px;
+    transform:rotate(25deg);
+}
+
+.leg2{
+    top:60px;
+    left:12px;
+    transform:rotate(-25deg);
+}
+
+/* Dust */
+.dust{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:white;
+    border-radius:50%;
+    opacity:.4;
+    animation:float 12s linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-100vh);
+    }
+}
+
+/* ==========================
+   MAIN CONTENT
+========================== */
+
+.container{
+    position:relative;
+    z-index:10;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.panel{
+    width:min(1100px,90%);
+    text-align:center;
+}
+
+h1{
+    font-size:3rem;
+    color:white;
+    text-shadow:0 0 15px rgba(0,0,0,.4);
+}
+
+.subtitle{
+    color:white;
+    font-size:1.1rem;
+    margin-top:10px;
+    margin-bottom:40px;
+    text-shadow:0 0 10px rgba(0,0,0,.4);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+/* ==========================
+   GLASS BUTTONS
+========================== */
+
+.btn{
+    padding:18px;
+    border:none;
+    border-radius:20px;
+    font-size:1rem;
+    color:white;
+    cursor:pointer;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.3);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.25),
+        inset 0 1px 1px rgba(255,255,255,.4);
+
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-6px);
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.35),
+        inset 0 1px 2px rgba(255,255,255,.5);
+}
+
+.btn:active{
+    transform:translateY(2px);
+}
+
+@media(max-width:768px){
+
+    h1{
+        font-size:2rem;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div id="bg">
+
+    <div class="crane"></div>
+
+    <div class="building">
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+    </div>
+
+    <!-- Workers -->
+
+    <div class="worker">
+        <div class="head"></div>
+        <div class="helmet"></div>
+        <div class="body"></div>
+        <div class="arm1"></div>
+        <div class="arm2"></div>
+        <div class="leg1"></div>
+        <div class="leg2"></div>
+    </div>
+
+    <div class="worker">
+        <div class="head"></div>
+        <div class="helmet"></div>
+        <div class="body"></div>
+        <div class="arm1"></div>
+        <div class="arm2"></div>
+        <div class="leg1"></div>
+        <div class="leg2"></div>
+    </div>
+
+    <div class="worker">
+        <div class="head"></div>
+        <div class="helmet"></div>
+        <div class="body"></div>
+        <div class="arm1"></div>
+        <div class="arm2"></div>
+        <div class="leg1"></div>
+        <div class="leg2"></div>
+    </div>
+
+    <div class="ground"></div>
+
+</div>
+
+<div class="container">
+
+    <div class="panel">
+
+        <h1>DESIGN PARAMETERS</h1>
+
+        <div class="subtitle">
+            Forms • Templates • References - for all Modalities
+        </div>
+
+        <div class="grid">
+
+            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 01</button>
+
+            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 02</button>
+
+            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 03</button>
+
+            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 04</button>
+
+            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 05</button>
+
+            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 06</button>
+
+            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 07</button>
+
+            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 08</button>
+
+            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 09</button>
+
+            <button class="btn" onclick="window.open('https://YOUR-LINK-HERE.com','_blank')">Button 10</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* Floating dust particles */
+
+for(let i=0;i<50;i++){
+
+    let d=document.createElement('div');
+    d.className='dust';
+
+    d.style.left=Math.random()*100+'vw';
+    d.style.animationDuration=(8+Math.random()*10)+'s';
+    d.style.animationDelay=Math.random()*5+'s';
+
+    document.getElementById('bg').appendChild(d);
+}
+
+</script>
+
+</body>
+</html>
