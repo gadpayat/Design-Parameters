@@ -168,83 +168,73 @@ h1{
     margin:10px 0 35px;
 }
 
-/* Drone */
+/* REALISTIC DRONE */
 .drone{
     position:absolute;
     top:80px;
-    left:65%;
-    width:120px;
-    height:50px;
-    z-index:3;
-    animation:hoverDrone 4s ease-in-out infinite;
+    right:12%;
+    width:180px;
+    height:100px;
+    z-index:4;
+    animation:droneFlight 8s ease-in-out infinite;
 }
+
+.drone svg{
+    width:100%;
+    height:100%;
+    overflow:visible;
+}
+
+.propeller{
+    transform-origin:center;
+    animation:propSpin .08s linear infinite;
+}
+
+.drone-light-red{
+    animation:blinkRed 1s infinite;
+}
+
+.drone-light-green{
+    animation:blinkGreen 1s infinite;
+}
+
 .searchlight{
-    position:absolute;
-    top:40px;
-    left:50px;
-    width:0;
-    height:0;
-    border-left:35px solid transparent;
-    border-right:35px solid transparent;
-    border-top:180px solid rgba(255,255,180,.15);
-}
-.drone-body{
-    position:absolute;
-    left:35px;
-    top:15px;
-    width:50px;
-    height:20px;
-    background:#333;
-    border-radius:20px;
+    animation:beamPulse 2s ease-in-out infinite;
 }
 
-.arm{
-    position:absolute;
-    width:35px;
-    height:3px;
-    background:#444;
-}
-
-.arm1{top:18px;left:5px;transform:rotate(-25deg);}
-.arm2{top:18px;right:5px;transform:rotate(25deg);}
-.arm3{top:28px;left:5px;transform:rotate(25deg);}
-.arm4{top:28px;right:5px;transform:rotate(-25deg);}
-
-.rotor{
-    position:absolute;
-    width:22px;
-    height:22px;
-    border:3px solid rgba(255,255,255,.6);
-    border-radius:50%;
-    animation:spin .15s linear infinite;
-}
-
-.rotor1{top:0;left:0;}
-.rotor2{top:0;right:0;}
-.rotor3{bottom:0;left:0;}
-.rotor4{bottom:0;right:0;}
-
-@keyframes spin{
+@keyframes propSpin{
     from{transform:rotate(0deg);}
     to{transform:rotate(360deg);}
 }
 
-@keyframes hoverDrone{
-    0%{
-        transform:translateX(0) translateY(0);
+@keyframes droneFlight{
+    0%,100%{
+        transform:translate(0,0) rotate(-1deg);
     }
     25%{
-        transform:translateX(60px) translateY(-15px);
+        transform:translate(30px,-12px) rotate(1deg);
     }
     50%{
-        transform:translateX(120px) translateY(0);
+        transform:translate(60px,0px) rotate(-1deg);
     }
     75%{
-        transform:translateX(60px) translateY(15px);
+        transform:translate(30px,12px) rotate(1deg);
     }
-    100%{
-        transform:translateX(0) translateY(0);
-    }
+}
+
+@keyframes blinkRed{
+    0%,50%,100%{opacity:1;}
+    25%,75%{opacity:.2;}
+}
+
+@keyframes blinkGreen{
+    0%,50%,100%{opacity:.2;}
+    25%,75%{opacity:1;}
+}
+
+@keyframes beamPulse{
+    0%,100%{opacity:.15;}
+    50%{opacity:.3;}
 }
 
 /* Buttons */
@@ -327,6 +317,76 @@ h1{font-size:2rem}
     </div>
 </div>
 
+<div class="drone">
+
+<svg viewBox="0 0 400 220">
+
+    <!-- Searchlight -->
+    <polygon class="searchlight"
+        points="200,120 150,220 250,220"
+        fill="rgba(255,255,180,.2)"/>
+
+    <!-- Arms -->
+    <line x1="200" y1="90" x2="90" y2="40"
+          stroke="#444" stroke-width="8"/>
+    <line x1="200" y1="90" x2="310" y2="40"
+          stroke="#444" stroke-width="8"/>
+    <line x1="200" y1="90" x2="90" y2="140"
+          stroke="#444" stroke-width="8"/>
+    <line x1="200" y1="90" x2="310" y2="140"
+          stroke="#444" stroke-width="8"/>
+
+    <!-- Propellers -->
+    <g class="propeller">
+        <ellipse cx="90" cy="40" rx="28" ry="4" fill="#222"/>
+        <ellipse cx="90" cy="40" rx="4" ry="28" fill="#222"/>
+    </g>
+
+    <g class="propeller">
+        <ellipse cx="310" cy="40" rx="28" ry="4" fill="#222"/>
+        <ellipse cx="310" cy="40" rx="4" ry="28" fill="#222"/>
+    </g>
+
+    <g class="propeller">
+        <ellipse cx="90" cy="140" rx="28" ry="4" fill="#222"/>
+        <ellipse cx="90" cy="140" rx="4" ry="28" fill="#222"/>
+    </g>
+
+    <g class="propeller">
+        <ellipse cx="310" cy="140" rx="28" ry="4" fill="#222"/>
+        <ellipse cx="310" cy="140" rx="4" ry="28" fill="#222"/>
+    </g>
+
+    <!-- Main Body -->
+    <rect x="145" y="55" width="110" height="70"
+          rx="25" fill="#2f2f2f"/>
+
+    <rect x="165" y="65" width="70" height="30"
+          rx="12" fill="#4a4a4a"/>
+
+    <!-- Camera -->
+    <line x1="200" y1="125" x2="200" y2="145"
+          stroke="#777" stroke-width="4"/>
+
+    <circle cx="200" cy="160" r="16"
+            fill="#111"/>
+
+    <circle cx="200" cy="160" r="8"
+            fill="#3da9ff"/>
+
+    <!-- Navigation Lights -->
+    <circle class="drone-light-red"
+            cx="145" cy="90" r="5"
+            fill="red"/>
+
+    <circle class="drone-light-green"
+            cx="255" cy="90" r="5"
+            fill="#00ff66"/>
+
+</svg>
+
+</div>
+
 <div class="building"></div>
 
 <div class="worker">
@@ -345,22 +405,6 @@ h1{font-size:2rem}
 </div>
 
 <div class="ground"></div>
-</div>
-
-<div class="drone">
-    <div class="arm arm1"></div>
-    <div class="arm arm2"></div>
-    <div class="arm arm3"></div>
-    <div class="arm arm4"></div>
-
-    <div class="rotor rotor1"></div>
-    <div class="rotor rotor2"></div>
-    <div class="rotor rotor3"></div>
-    <div class="rotor rotor4"></div>
-
-    <div class="drone-body"></div>
-
-    <div class="searchlight"></div>
 </div>
 
 <div class="container">
