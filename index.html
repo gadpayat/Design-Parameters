@@ -404,16 +404,31 @@ h1{font-size:2rem}
 </footer>
 
 <script>
-for(let i=0;i<500;i++){
- const s=document.createElement('div');
- s.className='spark';
- s.style.left=(70+Math.random()*10)+'%';
- s.style.top=(55+Math.random()*10)+'%';
- s.style.setProperty('--x',(Math.random()*180-90)+'px');
- s.style.setProperty('--y',(Math.random()*-140)+'px');
- s.style.animationDuration=(0.8+Math.random()*1.5)+'s';
- s.style.animationDelay=(Math.random()*2)+'s';
- document.getElementById('scene').appendChild(s);
+const weldPoints = [
+    {x:70, y:55},
+    {x:50, y:65},
+    {x:85, y:45}
+];
+
+for(let i=0;i<200;i++){
+
+    const point = weldPoints[
+        Math.floor(Math.random()*weldPoints.length)
+    ];
+
+    const s=document.createElement('div');
+    s.className='spark';
+
+    s.style.left=(point.x + Math.random()*5)+'%';
+    s.style.top=(point.y + Math.random()*5)+'%';
+
+    s.style.setProperty('--x',(Math.random()*180-90)+'px');
+    s.style.setProperty('--y',(Math.random()*-140)+'px');
+
+    s.style.animationDuration=(0.8+Math.random()*1.5)+'s';
+    s.style.animationDelay=(Math.random()*2)+'s';
+
+    document.getElementById('scene').appendChild(s);
 }
 
 </script>
