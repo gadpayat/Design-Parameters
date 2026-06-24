@@ -168,6 +168,85 @@ h1{
     margin:10px 0 35px;
 }
 
+/* Drone */
+.drone{
+    position:absolute;
+    top:80px;
+    left:65%;
+    width:120px;
+    height:50px;
+    z-index:3;
+    animation:hoverDrone 4s ease-in-out infinite;
+}
+.searchlight{
+    position:absolute;
+    top:40px;
+    left:50px;
+    width:0;
+    height:0;
+    border-left:35px solid transparent;
+    border-right:35px solid transparent;
+    border-top:180px solid rgba(255,255,180,.15);
+}
+.drone-body{
+    position:absolute;
+    left:35px;
+    top:15px;
+    width:50px;
+    height:20px;
+    background:#333;
+    border-radius:20px;
+}
+
+.arm{
+    position:absolute;
+    width:35px;
+    height:3px;
+    background:#444;
+}
+
+.arm1{top:18px;left:5px;transform:rotate(-25deg);}
+.arm2{top:18px;right:5px;transform:rotate(25deg);}
+.arm3{top:28px;left:5px;transform:rotate(25deg);}
+.arm4{top:28px;right:5px;transform:rotate(-25deg);}
+
+.rotor{
+    position:absolute;
+    width:22px;
+    height:22px;
+    border:3px solid rgba(255,255,255,.6);
+    border-radius:50%;
+    animation:spin .15s linear infinite;
+}
+
+.rotor1{top:0;left:0;}
+.rotor2{top:0;right:0;}
+.rotor3{bottom:0;left:0;}
+.rotor4{bottom:0;right:0;}
+
+@keyframes spin{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+
+@keyframes hoverDrone{
+    0%{
+        transform:translateX(0) translateY(0);
+    }
+    25%{
+        transform:translateX(60px) translateY(-15px);
+    }
+    50%{
+        transform:translateX(120px) translateY(0);
+    }
+    75%{
+        transform:translateX(60px) translateY(15px);
+    }
+    100%{
+        transform:translateX(0) translateY(0);
+    }
+}
+
 /* Buttons */
 .grid{
     display:grid;
@@ -266,6 +345,22 @@ h1{font-size:2rem}
 </div>
 
 <div class="ground"></div>
+</div>
+
+<div class="drone">
+    <div class="arm arm1"></div>
+    <div class="arm arm2"></div>
+    <div class="arm arm3"></div>
+    <div class="arm arm4"></div>
+
+    <div class="rotor rotor1"></div>
+    <div class="rotor rotor2"></div>
+    <div class="rotor rotor3"></div>
+    <div class="rotor rotor4"></div>
+
+    <div class="drone-body"></div>
+
+    <div class="searchlight"></div>
 </div>
 
 <div class="container">
